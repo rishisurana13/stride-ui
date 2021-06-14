@@ -12,9 +12,9 @@
 
     <div class="filter-btns">
 
-    <!-- <FilterButton groupName="Debt To Earnings" :filterOptions="debtEarningsOptions"/>
+    <FilterButton groupName="Debt To Earnings" :filterOptions="debtEarningsOptions"/>
     <FilterButton groupName="Annual Earnings" :filterOptions="meanEarningsOptions"/>
-    <FilterButton groupName="State" :filterOptions="['State','MA', 'CA', 'NY', 'TX']"/> -->
+    <FilterButton groupName="State" :filterOptions="['State','MA', 'CA', 'NY', 'TX']"/>
 
     <select  @change="onChange($event)" name="Education Level">
     <optgroup>
@@ -33,7 +33,7 @@
 
 <script>
 // @ is an alias to /src
-// import FilterButton from "@/components/FilterButton.vue";
+import FilterButton from "@/components/FilterButton.vue";
 import ResultsDisplay from "@/components/ResultsDisplay.vue";
 // import axios from 'axios'
 import { mapGetters } from 'vuex';
@@ -63,7 +63,7 @@ export default {
     
   },
   components: {
-    // FilterButton,
+    FilterButton,
     ResultsDisplay
   },
 };

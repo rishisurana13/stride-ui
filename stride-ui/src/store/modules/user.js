@@ -57,7 +57,12 @@ const actions = {
  	onSortByKeySaved({commit},sortKey) {
     	commit('sortByKeySaved', sortKey)
 
-    }
+    },
+  async deleteSaved({ state, commit }, id) {
+    const headers = { headers: { Authorization: 'Token ' + state.userDetails.token } }
+    axios.delete('http://127.0.0.1:8000/saved/' + id, headers)
+    commit('removeSavedCourse', id)
+  }
 }
 
 const mutations = {
@@ -68,6 +73,16 @@ const mutations = {
 		state.userDetails.token = data.token
 		state.loggedIn = true
 	},
+  removeSavedCourse: (state, id) => {
+    for(let i = 0; i < state.savedCourses.length; i++) {
+      if (state.savedCourses[i] !== undefined) {
+        if (state.savedCourses[i].id === id) {
+          state.savedCourses.splice(i,1)
+          break
+        }
+      }
+    }
+  },
 	setSavedCourses: (state, data) => {
 		state.savedCourses = data
 	},

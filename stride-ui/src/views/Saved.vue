@@ -27,6 +27,7 @@
         
         <!-- <td> {{ course.city.charAt(0).toUpperCase() + course.city.toLowerCase().slice(1) }}, {{ course.state}} </td> -->
         <td class="mean-earnings"> $ {{ numberWithCommas(course.mean_earnings) }}.00 </td>
+        <button class="delete-saved-btn" @click="onDeleteSaved(course.id)">Delete</button>
               </tr>
     </table>
 	</div>
@@ -38,7 +39,7 @@ export default {
 	name: "Saved",
 	computed: mapGetters(['savedCourseGetter']),
 	methods: {
-		...mapActions(['getSavedCourses', 'onSortByKeySaved']),
+		...mapActions(['getSavedCourses', 'onSortByKeySaved', 'deleteSaved']),
 	decideColor (de) {
       if (de < 1.15) {
         return '#15A028'
@@ -64,7 +65,10 @@ export default {
     sortByKey (sortKey) {
           this.onSortByKeySaved(sortKey)
          
-   	 	}
+   	 	},
+      onDeleteSaved(id) {
+        this.deleteSaved(id)
+      }
 	},
 	created () {
 		this.getSavedCourses()
@@ -99,7 +103,6 @@ table {
 
 .mean-earnings {
   padding-left: 20px;
-  /*text-align: right;*/
   width: 15%;
 }
 .rows-data-template td {
@@ -143,5 +146,13 @@ tr:hover {
   background-color: #1D5EEF;
   color: white;
 
+}
+.delete-saved-btn {
+  color: white;
+  border-color: transparent;
+  background-color: #1D5EEF;
+  border-radius: 5px;
+  margin-top: 1.2rem;
+  margin-right: 20%;
 }
 </style>
